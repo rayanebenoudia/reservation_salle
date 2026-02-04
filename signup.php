@@ -54,5 +54,10 @@ if (isset($_POST['submit'])) {
         <input type="password" name="confirm_password" required>
 
         <input type="submit" name="submit" value="S'inscrire">
+
     </form>
+
+    <p>
+            <a href="signin.php">Se connecter ?</a>
+        </p>
 </main>

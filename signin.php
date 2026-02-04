@@ -51,8 +51,8 @@ if (isset($_POST['submit'])) {
 
         <input type="submit" name="submit" value="Se connecter">
 
-        <p class="account">
-            Pas de compte ? <a href="inscription.php">S'inscrire</a>
+        <p>
+            <a href="signup.php">S'inscrire ?</a>
         </p>
     </form>
 </main>

@@ -120,6 +120,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
         <p><a href="deconnexion.php" style="color:red">Se déconnecter</a></p>
 
-    </main>
+    </main> 
 </body>
 </html>
