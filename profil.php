@@ -1,36 +1,33 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 require_once 'db.php';
 
-// 1. Sécurité : Si pas connecté, on dégage
 if (!isset($_SESSION['id'])) {
     header('Location: signin.php'); 
     exit();
 }
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $id_user = $_SESSION['id'];
 $message_status = "";
 
-
 // Mise à jour Username
 if (isset($_POST['update_username'])) {
-    // Nettoyage simple
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) die("Erreur CSRF");
+    
     $new_username = trim($_POST['username']);
-
     if (!empty($new_username)) {
-        // Vérif double username 
         $check = $pdo->prepare("SELECT id FROM user WHERE username = ? AND id != ?");
         $check->execute([$new_username, $id_user]);
         
         if ($check->rowCount() == 0) {
             $stmt = $pdo->prepare('UPDATE user SET username = ? WHERE id = ?');
             if ($stmt->execute([$new_username, $id_user])) {
-                $_SESSION['username'] = $new_username; // On met à jour la session
-                $message_status = "Nom d'utilisateur mis à jour !";
-                // On redirige pour nettoyer l'URL (enlever ?edit=username)
-                header("Location: profil.php");
+                $_SESSION['username'] = $new_username;
+                header("Location: profil.php?success=1");
                 exit();
             }
         } else {
@@ -41,23 +38,37 @@ if (isset($_POST['update_username'])) {
 
 // Mise à jour Password
 if (isset($_POST['update_password'])) {
-    $new_password = $_POST['password'];
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) die("Erreur CSRF");
 
-    if (!empty($new_password)) {
-        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare('UPDATE user SET password = ? WHERE id = ?');
-        if ($stmt->execute([$hashed_password, $id_user])) {
-            $message_status = "Mot de passe mis à jour !";
-            header("Location: profil.php");
-            exit();
+    $old_password = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
+
+    if (!empty($old_password) && !empty($new_password)) {
+        // Vérifier l'ancien mot de passe
+        $stmt = $pdo->prepare("SELECT password FROM user WHERE id = ?");
+        $stmt->execute([$id_user]);
+        $db_pass = $stmt->fetchColumn();
+
+        if (password_verify($old_password, $db_pass)) {
+            if (strlen($new_password) >= 8) {
+                $hashed = password_hash($new_password, PASSWORD_DEFAULT);
+                $update = $pdo->prepare("UPDATE user SET password = ? WHERE id = ?");
+                $update->execute([$hashed, $id_user]);
+                $message_status = "Mot de passe mis à jour !";
+            } else {
+                $message_status = "Le nouveau mot de passe est trop court.";
+            }
+        } else {
+            $message_status = "L'ancien mot de passe est incorrect.";
         }
     }
 }
-// Récupération
+
+if (isset($_GET['success'])) $message_status = "Mise à jour réussie !";
+
 $stmt = $pdo->prepare('SELECT username FROM user WHERE id = ?');
 $stmt->execute([$id_user]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -68,27 +79,22 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <h1>Paramètres du compte</h1>
 
     <?php if (!empty($message_status)): ?>
-        <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($message_status); ?></p>
+        <p style=><?php echo htmlspecialchars($message_status); ?></p>
     <?php endif; ?>
 
     <main>
-        
         <div class="profile-section">
             <p><strong>Nom d'utilisateur</strong></p>
-
-            <?php 
-            if (isset($_GET['edit']) && $_GET['edit'] == 'username'): 
-            ?>
+            <?php if (isset($_GET['edit']) && $_GET['edit'] == 'username'): ?>
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
                     <input type="submit" name="update_username" value="Enregistrer">
                     <a href="profil.php">Annuler</a>
                 </form>
-
             <?php else: ?>
                 <span><?php echo htmlspecialchars($user['username']); ?></span>
                 <a href="profil.php?edit=username"><button>Modifier</button></a>
@@ -99,17 +105,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <div class="profile-section">
             <p><strong>Mot de passe</strong></p>
-
-            <?php 
-            // On vérifie GET
-            if (isset($_GET['edit']) && $_GET['edit'] == 'password'): 
-            ?>
+            <?php if (isset($_GET['edit']) && $_GET['edit'] == 'password'): ?>
                 <form method="post">
-                    <input type="password" name="password" placeholder="Nouveau mot de passe" required>
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                    <input type="password" name="old_password" placeholder="Ancien mot de passe" required><br><br>
+                    <input type="password" name="new_password" placeholder="Nouveau mot de passe" required><br><br>
                     <input type="submit" name="update_password" value="Enregistrer">
                     <a href="profil.php">Annuler</a>
                 </form>
-
             <?php else: ?>
                 <span>********</span>
                 <a href="profil.php?edit=password"><button>Modifier</button></a>
@@ -117,9 +120,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
 
         <hr>
-        
-        <p><a href="deconnexion.php" style="color:red">Se déconnecter</a></p>
-
+        <p><a href="./deconnexion.php" style="color:red">Se déconnecter</a></p>  
     </main> 
 </body>
 </html>
