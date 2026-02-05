@@ -1,3 +1,7 @@
+*{
+    margin:0;
+}
+
 :root{
     --primary-color: white;
     --secondary-color: darkgrey;
@@ -6,7 +10,10 @@
 }
 body{
     background-color: var(--primary-color);
-    
+    min-height: 100vh;
+    background: fixed;
+    background-image: url(VP_Web-2-scaled-r6wg1nr2gh80fdzqsppo6nql9afl2tzzf0ivcngg24.jpg);
+    background-size: cover;
 }
 header{
     background-color: #1f78fe ;    
@@ -36,32 +43,7 @@ a {
   align-items: center;
 }
 
-.nav-link {
-  position: relative;
-  padding: 20px 40px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  z-index: 1;
-}
 
-/* Rectangle cyan */
-.nav-link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #73A9EF;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  
-  
-}
-
-/* Onglet actif */
-.nav-link.active::before {
-  opacity: 1;
-}
 
 footer{
      background-color:  #1f78fe ;    
@@ -69,5 +51,22 @@ footer{
     justify-content: space-around;
     align-items: center;
     height: 100px;
-    margin-top: 730px;
+    margin-top: 300px;
+    
+    
+}
+.container{
+     display: flex;
+  justify-content: flex-start; 
+  margin-top: 400px;  
+  margin-left: 150px ;     
+}
+.button{
+    border-radius: 10px;
+    background-color: #1f78fe;
+    color: white;
+    height: 50px;
+    width:200px;
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

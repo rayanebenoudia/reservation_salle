@@ -17,10 +17,18 @@
         <a href = "signup.php" class="btn">s'inscrire</a>
         <a href = "signin.php" class="btn"> se connecter </a>
        
-        <div class="rectangle"></div>
+        
   
     </header>
+    <main> 
+      <div class="container">
+     <a href="reservation_form.php">
+     <button class="button" name="button">Je reserve  </button>
+     </a>
+      </div>
+    </main>
     
+      
     <footer class="footer"></footer>
  </body>
  </html> 
