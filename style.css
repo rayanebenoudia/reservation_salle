@@ -1,0 +1,73 @@
+*{
+    margin:0;
+}
+
+:root{
+    --primary-color: white;
+    --secondary-color: darkgrey;
+    --effet: #0062ff;
+    --police: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color: var(--primary-color);
+    min-height: 100vh;
+    background: fixed;
+    background-image: url(VP_Web-2-scaled-r6wg1nr2gh80fdzqsppo6nql9afl2tzzf0ivcngg24.jpg);
+    background-size: cover;
+}
+header{
+    background-color:var(--effet);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.btn{
+    color:white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.navbar {
+  display: flex;
+  background: #73A9EF;
+  height:100px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+footer{
+     background-color: var(--effet);   
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    margin-top: 350px;
+    
+    
+}
+.container{
+     display: flex;
+  justify-content: flex-start; 
+  margin-top: 300px;  
+  margin-left: 150px ; 
+
+}
+.button{
+    border-radius: 10px;
+    background-color: var(--effet);
+    color: white;
+    height: 100px;
+    width:400px;
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
