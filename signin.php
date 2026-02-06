@@ -1,6 +1,6 @@
 <?php
 require_once 'db.php';
-// Sécurisation des cookies de session
+
 ini_set('session.cookie_httponly', 1);
 session_start();
 
@@ -16,14 +16,17 @@ if (isset($_POST['submit'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($motdepasse, $user['password'])) {
-            // Protection contre la fixation de session
             session_regenerate_id(true);
+            
             $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            
+            
+            $_SESSION['is_admin'] = (int)$user['is_admin']; 
+            
             header("Location: profil.php");
             exit();
         } else {
-            // Message générique pour la sécurité
             $error = "Identifiants incorrects.";
         }
     }
