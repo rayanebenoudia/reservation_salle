@@ -1,0 +1,73 @@
+:root{
+    --primary-color: white;
+    --secondary-color: darkgrey;
+    --effet: blue;
+    --police: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color: var(--primary-color);
+    
+}
+header{
+    background-color: #1f78fe ;    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.btn{
+    color:white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.navbar {
+  display: flex;
+  background: #73A9EF;
+  height:100px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link {
+  position: relative;
+  padding: 20px 40px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Rectangle cyan */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #73A9EF;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  
+}
+
+/* Onglet actif */
+.nav-link.active::before {
+  opacity: 1;
+}
+
+footer{
+     background-color:  #1f78fe ;    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    margin-top: 730px;
+}
