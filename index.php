@@ -12,7 +12,6 @@
         <nav class="navbar">
         <a href ="index.php" class ="btn">Accueil</a>
         </nav>
-        <a href ="reservation_form.php" class="btn">reservation</a>
         <a href ="reservation_detail.php" class="btn">Mes reservations</a>
         <a href = "signup.php" class="btn">s'inscrire</a>
         <a href = "signin.php" class="btn"> se connecter </a>
@@ -23,7 +22,7 @@
     <main> 
       <div class="container">
      <a href="reservation_form.php">
-     <button class="button" name="button">Je reserve  </button>
+     <button class="button" name="button">Je reserve une salle   </button>
      </a>
       </div>
     </main>

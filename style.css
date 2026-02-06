@@ -5,7 +5,7 @@
 :root{
     --primary-color: white;
     --secondary-color: darkgrey;
-    --effet: blue;
+    --effet: #0062ff;
     --police: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 body{
@@ -16,7 +16,7 @@ body{
     background-size: cover;
 }
 header{
-    background-color: #1f78fe ;    
+    background-color:var(--effet);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -46,27 +46,28 @@ a {
 
 
 footer{
-     background-color:  #1f78fe ;    
+     background-color: var(--effet);   
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100px;
-    margin-top: 300px;
+    margin-top: 350px;
     
     
 }
 .container{
      display: flex;
   justify-content: flex-start; 
-  margin-top: 400px;  
-  margin-left: 150px ;     
+  margin-top: 300px;  
+  margin-left: 150px ; 
+
 }
 .button{
     border-radius: 10px;
-    background-color: #1f78fe;
+    background-color: var(--effet);
     color: white;
-    height: 50px;
-    width:200px;
+    height: 100px;
+    width:400px;
     font-size: 25px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
