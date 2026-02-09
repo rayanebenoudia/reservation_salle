@@ -16,7 +16,6 @@ if (isset($_POST["submit"])) {
     $heure_debut = $_POST["heure_debut"];
     $heure_fin = $_POST["heure_fin"];
 
-    // On assemble date + heure
     $start_time = $date . " " . $heure_debut . ":00";
     $end_time = $date . " " . $heure_fin . ":00";
 
@@ -39,37 +38,40 @@ if (isset($_POST["submit"])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Créer une réservation</title>
 </head>
+
 <body>
 
-<h1>Créer une réservation</h1>
+    <h1>Créer une réservation</h1>
 
-<form method="post">
+    <form method="post">
 
-    <label>Titre</label><br>
-    <input type="text" name="title" required><br><br>
+        <label>Titre</label><br>
+        <input type="text" name="title" required><br><br>
 
-    <label>Description</label><br>
-    <textarea name="description"></textarea><br><br>
+        <label>Description</label><br>
+        <textarea name="description"></textarea><br><br>
 
-    <label>Date</label><br>
-    <input type="date" name="date" required><br><br>
+        <label>Date</label><br>
+        <input type="date" name="date" required><br><br>
 
-    <label>Heure de début</label><br>
-    <input type="time" name="heure_debut" required><br><br>
+        <label>Heure de début</label><br>
+        <input type="time" name="heure_debut" required><br><br>
 
-    <label>Heure de fin</label><br>
-    <input type="time" name="heure_fin" required><br><br>
+        <label>Heure de fin</label><br>
+        <input type="time" name="heure_fin" required><br><br>
 
-    <input type="submit" name="submit" value="Réserver">
+        <input type="submit" name="submit" value="Réserver">
 
-</form>
+    </form>
 
-<br>
-<a href="schedule.php">Retour au planning</a>
+    <br>
+    <a href="schedule.php">Retour au planning</a>
 
 </body>
+
 </html>

@@ -57,7 +57,6 @@ $formatter = new IntlDateFormatter(
 <p><b>Créateur :</b> <?php echo htmlspecialchars($event["username"]); ?></p>
 <p><b>Titre :</b> <?php echo htmlspecialchars($event["event_title"]); ?></p>  
 <p><b>Description :</b> <?php echo nl2br(htmlspecialchars($event["description"])); ?></p>
-
 <p><b>Début :</b> <?php echo ucfirst($formatter->format($start)); ?></p>
 <p><b>Fin :</b> <?php echo ucfirst($formatter->format($end)); ?></p>
 
