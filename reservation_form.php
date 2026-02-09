@@ -41,11 +41,22 @@ if (isset($_POST["submit"])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Créer une réservation</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Creer une reservation</title>
 </head>
 <body>
-
-<h1>Créer une réservation</h1>
+<body>
+    <header class="header">
+        
+        <a href ="index.php" class ="btn">Accueil</a>
+        <a href="reservation_detail.php" class="btn">Ma reservation</a>
+        <a href="deconnexion.php" class="btn"> deconnexion</a>
+       
+        
+  
+    </header>
+<div class = reservation_form>
+<h1>Creer une reservation</h1>
 
 <form method="post">
 
@@ -70,6 +81,6 @@ if (isset($_POST["submit"])) {
 
 <br>
 <a href="schedule.php">Retour au planning</a>
-
+</div>
 </body>
 </html>

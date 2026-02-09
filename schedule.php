@@ -24,10 +24,20 @@ $jours = [
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Planning</title>
 </head>
 <body>
-
+<header class="header">
+        
+        <a href ="index.php" class ="btn">Accueil</a>
+        <a href="reservation_detail.php" class="btn">Ma reservation</a>
+        <a href="deconnexion.php" class="btn"> deconnexion</a>
+       
+        
+  
+    </header>
+<div class ="planning">
 <h1>Planning de la salle</h1>
 
 <table border="1">
@@ -72,7 +82,11 @@ for ($heure = 8; $heure < 19; $heure++) {
 </table>
 
 <br>
-<a href="reservation_form.php">Créer une réservation</a>
+<a href="reservation_form.php">Creer une reservation</a>
+</div>
 
+  
 </body>
+
+
 </html>
